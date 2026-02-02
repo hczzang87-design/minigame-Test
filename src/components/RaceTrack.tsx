@@ -82,7 +82,7 @@ export function RaceTrack({
                   <div className="relative flex-1 h-10 md:h-12">
                     <div
                       className={cn(
-                        "absolute top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-2xl md:text-3xl transition-all duration-[4500ms] ease-out",
+                        "absolute top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-2xl md:text-3xl transition-all duration-300 ease-linear",
                         player.finished && "drop-shadow-lg"
                       )}
                       style={{
