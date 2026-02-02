@@ -3,13 +3,12 @@ import { Animal, ANIMALS } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-interface SetupScreenProps {
+interface AnimalSelectionScreenProps {
   playerCount: number;
-  setPlayerCount: (count: number) => void;
   onStart: (selectedAnimals: Animal[]) => void;
 }
 
-export function SetupScreen({ playerCount, setPlayerCount, onStart }: SetupScreenProps) {
+export function AnimalSelectionScreen({ playerCount, onStart }: AnimalSelectionScreenProps) {
   const [selectedAnimals, setSelectedAnimals] = useState<(Animal | null)[]>(
     Array(15).fill(null)
   );
@@ -28,12 +27,6 @@ export function SetupScreen({ playerCount, setPlayerCount, onStart }: SetupScree
     }
   };
 
-  const handlePlayerCountChange = (count: number) => {
-    setPlayerCount(count);
-    setSelectedAnimals(Array(15).fill(null));
-    setCurrentPlayer(0);
-  };
-
   const canStart = selectedAnimals.slice(0, playerCount).every(a => a !== null);
 
   const handleStart = () => {
@@ -50,31 +43,8 @@ export function SetupScreen({ playerCount, setPlayerCount, onStart }: SetupScree
             🏃 동물 달리기 경주 🏃
           </h1>
           <p className="text-muted-foreground text-lg">
-            친구들과 함께 신나는 경주를 즐겨보세요!
+            각 플레이어의 동물을 선택하세요 ({playerCount}명)
           </p>
-        </div>
-
-        {/* Player Count Selection */}
-        <div className="bg-card rounded-2xl p-6 shadow-soft mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-card-foreground">
-            👥 참여 인원 선택
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {Array.from({ length: 14 }, (_, i) => i + 2).map(count => (
-              <button
-                key={count}
-                onClick={() => handlePlayerCountChange(count)}
-                className={cn(
-                  "w-10 h-10 md:w-12 md:h-12 rounded-xl font-bold transition-all duration-200",
-                  playerCount === count
-                    ? "bg-primary text-primary-foreground shadow-button scale-110"
-                    : "bg-secondary text-secondary-foreground hover:bg-accent"
-                )}
-              >
-                {count}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Animal Selection */}

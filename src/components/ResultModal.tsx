@@ -67,18 +67,12 @@ export function ResultModal({ open, onClose, onRestart, players }: ResultModalPr
             </div>
           </div>
 
-          {/* Buttons */}
-          <div className="flex gap-3">
-            <Button
-              variant="outline"
-              onClick={onClose}
-              className="flex-1 rounded-xl"
-            >
-              닫기
-            </Button>
+          {/* Button */}
+          <div className="flex justify-center">
             <Button
               onClick={onRestart}
-              className="flex-1 rounded-xl bg-primary hover:bg-primary/90"
+              size="lg"
+              className="w-full rounded-xl bg-primary hover:bg-primary/90 text-lg py-6"
             >
               🔄 다시 시작
             </Button>

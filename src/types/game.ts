@@ -14,7 +14,7 @@ export interface Player {
   rank: number | null;
 }
 
-export type GamePhase = 'setup' | 'countdown' | 'racing' | 'finished';
+export type GamePhase = 'selectingPlayers' | 'selectingAnimals' | 'countdown' | 'racing' | 'finished';
 
 export const ANIMALS: Animal[] = [
   { id: 'dog', name: '강아지', emoji: '🐶' },

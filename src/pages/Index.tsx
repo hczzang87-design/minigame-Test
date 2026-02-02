@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { SetupScreen } from '@/components/SetupScreen';
+import { PlayerCountScreen } from '@/components/PlayerCountScreen';
+import { AnimalSelectionScreen } from '@/components/AnimalSelectionScreen';
 import { RaceTrack } from '@/components/RaceTrack';
 import { ResultModal } from '@/components/ResultModal';
 import { useRaceGame } from '@/hooks/useRaceGame';
@@ -13,12 +14,17 @@ const Index = () => {
     gamePhase,
     countdown,
     elapsedTime,
+    goToAnimalSelection,
     initializePlayers,
     startCountdown,
     resetGame,
   } = useRaceGame();
 
   const [showResultModal, setShowResultModal] = useState(false);
+
+  const handlePlayerCountComplete = () => {
+    goToAnimalSelection();
+  };
 
   const handleStart = (selectedAnimals: Animal[]) => {
     initializePlayers(playerCount, selectedAnimals);
@@ -41,11 +47,20 @@ const Index = () => {
     setShowResultModal(false);
   };
 
-  if (gamePhase === 'setup') {
+  if (gamePhase === 'selectingPlayers') {
     return (
-      <SetupScreen
+      <PlayerCountScreen
         playerCount={playerCount}
         setPlayerCount={setPlayerCount}
+        onComplete={handlePlayerCountComplete}
+      />
+    );
+  }
+
+  if (gamePhase === 'selectingAnimals') {
+    return (
+      <AnimalSelectionScreen
+        playerCount={playerCount}
         onStart={handleStart}
       />
     );

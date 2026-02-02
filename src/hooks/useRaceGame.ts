@@ -6,12 +6,16 @@ const RACE_DURATION = 5000; // 5 seconds
 export function useRaceGame() {
   const [playerCount, setPlayerCount] = useState(4);
   const [players, setPlayers] = useState<Player[]>([]);
-  const [gamePhase, setGamePhase] = useState<GamePhase>('setup');
+  const [gamePhase, setGamePhase] = useState<GamePhase>('selectingPlayers');
   const [countdown, setCountdown] = useState(3);
   const [elapsedTime, setElapsedTime] = useState(0);
   
   const raceStartTime = useRef<number>(0);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
+
+  const goToAnimalSelection = useCallback(() => {
+    setGamePhase('selectingAnimals');
+  }, []);
 
   const initializePlayers = useCallback((count: number, selectedAnimals: Animal[]) => {
     const newPlayers: Player[] = [];
@@ -51,10 +55,10 @@ export function useRaceGame() {
     raceStartTime.current = Date.now();
     setElapsedTime(0);
     
-    // Generate random finish times for each player (determines their final rank)
-    // Finish times are spread between 4.5s and 5s for close competition
+    // Generate more varied random finish times for exciting race
+    // Spread times between 3s and 7s for dramatic position changes
     const finishTimes = players.map(() => {
-      return 4500 + Math.random() * 500; // Between 4.5s and 5s
+      return 3000 + Math.random() * 4000; // Between 3s and 7s
     });
     
     // Shuffle to create random finish order
@@ -64,11 +68,11 @@ export function useRaceGame() {
       [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
     }
     
-    // Assign finish times based on shuffle order (creates distinct finish times)
+    // Assign finish times based on shuffle order
     const assignedFinishTimes = players.map((_, playerIndex) => {
       const rankOrder = shuffledIndices.indexOf(playerIndex);
-      // Earlier rank = faster finish time (smaller time = more position at any given moment)
-      return 4500 + (rankOrder * (500 / players.length));
+      // More spread out times for dynamic racing
+      return 3000 + (rankOrder * (4000 / players.length));
     });
     
     // Set final positions immediately for CSS transition
@@ -113,7 +117,7 @@ export function useRaceGame() {
     if (timerInterval.current) {
       clearInterval(timerInterval.current);
     }
-    setGamePhase('setup');
+    setGamePhase('selectingPlayers');
     setPlayers([]);
     setCountdown(3);
     setElapsedTime(0);
@@ -134,6 +138,7 @@ export function useRaceGame() {
     gamePhase,
     countdown,
     elapsedTime,
+    goToAnimalSelection,
     initializePlayers,
     startCountdown,
     resetGame,
