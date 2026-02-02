@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animal Racing Game Design System
+   Pastel-toned athletic track theme
+*/
+
+@layer base {
+  :root {
+    /* Base Colors - Soft Cream Background */
+    --background: 45 30% 97%;
+    --foreground: 220 25% 20%;
+
+    /* Cards - Clean White */
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 20%;
+
+    /* Primary - Soft Coral */
+    --primary: 12 76% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft Mint */
+    --secondary: 165 40% 90%;
+    --secondary-foreground: 165 50% 25%;
+
+    /* Muted - Light Gray */
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 10% 50%;
+
+    /* Accent - Soft Blue */
+    --accent: 200 60% 92%;
+    --accent-foreground: 200 60% 30%;
+
+    /* Destructive - Soft Red */
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success - Soft Green */
+    --success: 145 50% 55%;
+    --success-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 12 76% 65%;
+
+    --radius: 0.75rem;
+
+    /* Track Colors */
+    --track: 12 45% 75%;
+    --track-bg: 45 25% 92%;
+    --lane-even: 12 30% 80%;
+    --lane-odd: 12 35% 85%;
+    --finish: 0 0% 10%;
+
+    /* Medal Colors */
+    --gold: 45 90% 50%;
+    --silver: 220 10% 65%;
+    --bronze: 25 50% 45%;
+
+    /* Animal Card */
+    --animal-card: 45 25% 95%;
+    --animal-card-hover: 45 30% 92%;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(220 25% 20% / 0.08);
+    --shadow-button: 0 4px 12px hsl(12 76% 65% / 0.3);
+    --shadow-button-hover: 0 6px 20px hsl(12 76% 65% / 0.4);
+    --shadow-track: 0 8px 30px hsl(12 45% 50% / 0.15);
+    --shadow-animal: 0 4px 12px hsl(45 25% 50% / 0.2);
+    --shadow-modal: 0 20px 60px hsl(220 25% 20% / 0.2);
+  }
+
+  .dark {
+    --background: 220 25% 12%;
+    --foreground: 45 20% 95%;
+
+    --card: 220 20% 18%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 220 20% 18%;
+    --popover-foreground: 45 20% 95%;
+
+    --primary: 12 70% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 165 30% 25%;
+    --secondary-foreground: 165 40% 85%;
+
+    --muted: 220 15% 25%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 200 40% 25%;
+    --accent-foreground: 200 50% 85%;
+
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 40% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 25%;
+    --ring: 12 70% 60%;
+
+    --track: 12 35% 35%;
+    --track-bg: 220 20% 15%;
+    --lane-even: 12 25% 30%;
+    --lane-odd: 12 30% 35%;
+
+    --animal-card: 220 20% 22%;
+    --animal-card-hover: 220 20% 28%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer utilities {
+  .animate-bounce {
+    animation: bounce 0.5s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Running Animation - Body bob */
+  .animate-running-bob {
+    animation: running-bob 0.2s ease-in-out infinite;
+  }
+
+  @keyframes running-bob {
+    0%, 100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-3px) rotate(2deg);
+    }
+  }
+
+  /* Arm Swing Animation */
+  .animate-arm-swing {
+    animation: arm-swing 0.3s ease-in-out infinite;
+  }
+
+  .animate-arm-swing-reverse {
+    animation: arm-swing 0.3s ease-in-out infinite reverse;
+  }
+
+  @keyframes arm-swing {
+    0%, 100% {
+      transform: translateY(-50%) translateX(-8px) rotate(-30deg);
+    }
+    50% {
+      transform: translateY(-50%) translateX(-8px) rotate(30deg);
+    }
+  }
+
+  /* Leg Run Animation */
+  .animate-leg-run {
+    animation: leg-run 0.2s ease-in-out infinite;
+  }
+
+  .animate-leg-run-reverse {
+    animation: leg-run 0.2s ease-in-out infinite reverse;
+  }
+
+  @keyframes leg-run {
+    0%, 100% {
+      transform: rotate(-20deg) translateY(0);
+    }
+    50% {
+      transform: rotate(20deg) translateY(-2px);
+    }
+  }
+
+  /* Dust Float Animation */
+  .animate-dust-float {
+    animation: dust-float 0.4s ease-out infinite;
+  }
+
+  .animate-dust-float-delay {
+    animation: dust-float 0.4s ease-out infinite;
+    animation-delay: 0.1s;
+  }
+
+  .animate-dust-float-delay-2 {
+    animation: dust-float 0.4s ease-out infinite;
+    animation-delay: 0.2s;
+  }
+
+  @keyframes dust-float {
+    0% {
+      opacity: 0.6;
+      transform: translateX(0) translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-15px) translateY(-5px) scale(0.5);
+    }
+  }
+}
